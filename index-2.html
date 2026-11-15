@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method — Ape Score</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap hd">
+<a class="logo" href="index.html"><i>▲</i> Ape Score</a>
+<nav id="nv"><a href="index.html">Start</a><a href="how.html" class="on">Method</a><a href="reviews.html">Reviews</a><a href="stats.html">Live stats</a><a href="install.html">Install</a></nav>
+<a href="install.html" class="btn">Install</a>
+<button class="burger" id="bg">☰</button>
+</div></header>
+
+<div class="wrap">
+<section style="border:0">
+<div class="kick">Method</div>
+<h2>What the score actually measures.</h2>
+<p class="sub">Nine on-chain checks, weighted. Every check reads public chain state — no wallet connection, no off-chain guesses.</p>
+
+<table class="t">
+<tr><th>Check</th><th>Weight</th><th>Green</th><th>Red</th></tr>
+<tr><td>Liquidity depth</td><td>22%</td><td>&gt; 60% locked</td><td>&lt; 25%</td></tr>
+<tr><td>Top-10 holder concentration</td><td>20%</td><td>&lt; 30% supply</td><td>&gt; 55%</td></tr>
+<tr><td>Dev wallet share</td><td>18%</td><td>&lt; 5%</td><td>&gt; 15%</td></tr>
+<tr><td>Sniper wallets in first 3 blocks</td><td>14%</td><td>&lt; 30</td><td>&gt; 80</td></tr>
+<tr><td>Mint authority</td><td>8%</td><td>revoked</td><td>active</td></tr>
+<tr><td>Freeze authority</td><td>6%</td><td>revoked</td><td>active</td></tr>
+<tr><td>Bundled buys</td><td>6%</td><td>none</td><td>&gt; 12 wallets</td></tr>
+<tr><td>Holder count</td><td>4%</td><td>&gt; 2,500</td><td>&lt; 400</td></tr>
+<tr><td>LP burn status</td><td>2%</td><td>burned</td><td>unburned</td></tr>
+</table>
+
+<div class="grid3">
+<div class="card"><b>1.0 – 3.9</b><p>High risk. Concentration or liquidity says the dev can exit on you.</p></div>
+<div class="card"><b>4.0 – 6.9</b><p>Mixed. Watch the dev wallet and the first-minute buys before sizing.</p></div>
+<div class="card"><b>7.0 – 10.0</b><p>Clean. Spread holders, deep liquidity, revoked authorities.</p></div>
+</div>
+
+<div class="box">
+<h2 style="font-size:20px">Score caps</h2>
+<p class="sub" style="font-size:14px">A single red on liquidity, concentration or dev wallet caps the total at 6.9 — no clean tail can rescue a coin that fails one of the three primary checks.</p>
+</div>
+</section>
+</div>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px">
+<span>© Ape Score — not financial advice.</span><span><a href="legal.html">Legal</a></span>
+</div></footer>
+<script>document.getElementById('bg').onclick=function(){document.getElementById('nv').classList.toggle('open')};</script>
+</body>
+</html>

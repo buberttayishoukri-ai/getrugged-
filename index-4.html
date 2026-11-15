@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live stats — Ape Score</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap hd">
+<a class="logo" href="index.html"><i>▲</i> Ape Score</a>
+<nav id="nv"><a href="index.html">Start</a><a href="how.html">Method</a><a href="reviews.html">Reviews</a><a href="stats.html" class="on">Live stats</a><a href="install.html">Install</a></nav>
+<a href="install.html" class="btn">Install</a>
+<button class="burger" id="bg">☰</button>
+</div></header>
+
+<div class="wrap">
+<section style="border:0">
+<div class="kick">Live stats</div>
+<h2>Platform activity.</h2>
+<p class="sub">Counted in real time from every install and every scan.</p>
+<div class="kpis">
+<div class="kpi"><b id="k1">–</b><span>Installs</span></div>
+<div class="kpi"><b id="k2">–</b><span>Scans</span></div>
+<div class="kpi"><b id="k3">–</b><span>Wallets seen</span></div>
+<div class="kpi"><b id="k4">–</b><span>Refs resolved</span></div>
+</div>
+<table class="t"><thead><tr><th>Terminal</th><th>Scans</th></tr></thead><tbody id="tb"><tr><td colspan="2" style="color:#8b96a5">Lade…</td></tr></tbody></table>
+</section>
+</div>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px">
+<span>© Ape Score — not financial advice.</span><span><a href="legal.html">Legal</a></span>
+</div></footer>
+
+<script>
+document.getElementById('bg').onclick=function(){document.getElementById('nv').classList.toggle('open')};
+var UP='https://glorious-glider-159267.upstash.io',TK='gQAAAAAAAm4jAAIgcDI5MGRjOTI4ZjRiNzE0ZmZiOTM5NTY5M2RhZGJmNDRjYg';
+fetch(UP+'/lrange/apes:hits/0/500',{headers:{Authorization:'Bearer '+TK}}).then(function(r){return r.json()}).then(function(j){
+var rows=(j.result||[]).map(function(x){try{return JSON.parse(x)}catch(e){return null}}).filter(Boolean);
+var hits=rows.filter(function(x){return x.t==='hit'});
+var ins=rows.filter(function(x){return x.t==='install'}).length;
+var uq={};hits.forEach(function(x){if(x.w)uq[x.w]=1});
+var by={};hits.forEach(function(x){if(x.h)by[x.h]=(by[x.h]||0)+1});
+document.getElementById('k1').textContent=ins;
+document.getElementById('k2').textContent=hits.length;
+document.getElementById('k3').textContent=Object.keys(uq).length;
+document.getElementById('k4').textContent=hits.filter(function(x){return x.k}).length;
+var t=Object.keys(by).sort(function(a,b){return by[b]-by[a]});
+document.getElementById('tb').innerHTML=t.length?t.map(function(k){return '<tr><td>'+k+'</td><td>'+by[k]+'</td></tr>'}).join(''):'<tr><td colspan="2" style="color:#8b96a5">Noch keine Scans</td></tr>';
+}).catch(function(){document.getElementById('tb').innerHTML='<tr><td colspan="2" style="color:#ff5f56">Daten nicht ladbar</td></tr>'});
+</script>
+</body>
+</html>

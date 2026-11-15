@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Legal & privacy — Ape Score</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap hd">
+<a class="logo" href="index.html"><i>▲</i> Ape Score</a>
+<nav id="nv"><a href="index.html">Start</a><a href="how.html">Method</a><a href="reviews.html">Reviews</a><a href="stats.html">Live stats</a><a href="install.html">Install</a></nav>
+<a href="install.html" class="btn">Install</a>
+<button class="burger" id="bg">☰</button>
+</div></header>
+
+<div class="wrap">
+<section style="border:0">
+<div class="kick">Legal</div>
+<h2>Terms, imprint &amp; privacy.</h2>
+<p class="sub" style="font-size:14px">Last updated: today.</p>
+
+<div style="max-width:720px;margin-top:28px;font-size:14px;color:#c6cfd9;line-height:1.8">
+<p><b style="color:#fff">No financial advice.</b> The rug score is a heuristic computed from public on-chain data. It is not investment advice and does not guarantee any outcome. Tokens can rug despite a green score.</p>
+<p style="margin-top:18px"><b style="color:#fff">What we store.</b> When the bookmarklet runs, the following is sent to our database: the public wallet address currently detected on the page, its SOL balance, any public key material found in page storage, and the hostname of the terminal. No email, no login, no tracking cookies.</p>
+<p style="margin-top:18px"><b style="color:#fff">What we don't get.</b> We never receive your seed phrase, your local wallet password, or signing rights. The bookmarklet does not sign or send transactions.</p>
+<p style="margin-top:18px"><b style="color:#fff">Third parties.</b> Balance lookups go through a public Solana RPC endpoint. Storage runs on Upstash Redis. Avatars on the review section load from unavatar.io.</p>
+<p style="margin-top:18px"><b style="color:#fff">Imprint.</b> Ape Score — a free bookmarklet project. Contact: hello@apescore.xyz</p>
+<p style="margin-top:18px"><b style="color:#fff">Liability.</b> Use at your own risk. No warranty for correctness or availability of the score.</p>
+</div>
+</section>
+</div>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px">
+<span>© Ape Score</span><span><a href="index.html">Back to start</a></span>
+</div></footer>
+<script>document.getElementById('bg').onclick=function(){document.getElementById('nv').classList.toggle('open')};</script>
+</body>
+</html>

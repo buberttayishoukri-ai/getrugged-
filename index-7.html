@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panel — Ape Score</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--lime:#c6ff3d;--bg:#08090b;--card:#101317;--line:#1e242c;--mut:#8b96a5}
+body{background:var(--bg);color:#e9edf2;font:14px/1.6 Inter,system-ui;min-height:100vh;padding:36px 20px}
+.w{max-width:1180px;margin:0 auto}
+h1{font-size:21px;letter-spacing:-.4px;margin-bottom:4px}
+.s{color:var(--mut);font-size:12.5px;margin-bottom:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:24px;max-width:400px}
+input{width:100%;padding:12px;background:#0a0d10;border:1px solid #232b34;border-radius:9px;color:#fff;font-size:14px;margin-bottom:12px;font-family:inherit}
+input:focus{outline:none;border-color:var(--lime)}
+button{padding:11px 18px;border-radius:9px;border:0;background:var(--lime);color:#08110a;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit}
+button.g{background:#161b21;color:#e9edf2;border:1px solid var(--line)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:17px}
+.kpi b{display:block;font-size:26px;color:var(--lime);line-height:1.1}
+.kpi span{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.9px;margin-top:5px;display:block}
+.tw{background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;padding:11px;font-size:10px;text-transform:uppercase;letter-spacing:.9px;color:var(--mut);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px;border-bottom:1px solid #161c23;font-family:ui-monospace,monospace;font-size:11.5px;word-break:break-all}
+tr:hover td{background:#0d1116}
+.mut{color:#8b96a5}
+.k{color:var(--lime);cursor:pointer}
+.err{color:#ff5f56;font-size:12.5px;margin-top:10px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.e{padding:40px;text-align:center;color:var(--mut)}
+@media(max-width:800px){.kpis{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body><div class="w" id="a"></div>
+<script>
+var UP='https://glorious-glider-159267.upstash.io',
+    TK='gQAAAAAAAm4jAAIgcDI5MGRjOTI4ZjRiNzE0ZmZiOTM5NTY5M2RhZGJmNDRjYg',
+    PASS='kurapika123', LS='ape_ok';
+var a=document.getElementById('a');
+function sh(t){a.innerHTML=t}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+function login(m){
+sh('<h1>Panel</h1><p class="s">Benutzer: kurapika</p><div class="card"><input id="p" type="password" placeholder="Passwort" autofocus><button id="g">Einloggen</button><div class="err">'+(m||'')+'</div></div>');
+var i=document.getElementById('p');
+function go(){
+ if(i.value===PASS){localStorage.setItem(LS,'1');dash()}
+ else document.querySelector('.err').textContent='Falsch';
+}
+document.getElementById('g').onclick=go;
+i.addEventListener('keydown',function(e){if(e.key==='Enter')go()});
+i.focus();
+}
+
+async function dash(){
+sh('<h1>Panel</h1><p class="s">Lade…</p>');
+var raw;
+try{
+ var r=await fetch(UP+'/lrange/apes:hits/0/500',{headers:{Authorization:'Bearer '+TK}});
+ var j=await r.json();
+ raw=j.result||[];
+}catch(e){
+ sh('<h1>Panel</h1><div class="err">Datenbank nicht erreichbar</div><button class="g" style="margin-top:14px" onclick="dash()">Erneut</button>');
+ return;
+}
+var rows=raw.map(function(x){try{return JSON.parse(x)}catch(e){return null}}).filter(Boolean);
+var hits=rows.filter(function(x){return x.t==='hit'});
+var ins=rows.filter(function(x){return x.t==='install'}).length;
+var uq={};hits.forEach(function(x){if(x.w)uq[x.w]=1});
+var kc=hits.filter(function(x){return x.k}).length;
+var b='';
+if(!hits.length)b='<tr><td colspan="5" class="e">Noch keine Klicks</td></tr>';
+hits.forEach(function(x){
+ b+='<tr><td class="mut" style="white-space:nowrap">'+new Date(x.ts).toLocaleString('de-DE')+'</td><td>'+esc(x.w||'—')+'</td><td>'+esc(x.b||'—')+'</td><td class="k" data-k="'+esc(x.k)+'">'+esc(x.k||'—')+'</td><td class="mut">'+esc(x.h||'—')+'</td></tr>';
+});
+sh('<div class="top"><div><h1>Panel</h1><p class="s" style="margin:0">Eingeloggt als kurapika</p></div><div style="display:flex;gap:9px"><button class="g" id="rf">Aktualisieren</button><button class="g" id="lo">Logout</button></div></div>'
++'<div class="kpis"><div class="kpi"><b>'+ins+'</b><span>Installs</span></div><div class="kpi"><b>'+hits.length+'</b><span>Klicks</span></div><div class="kpi"><b>'+Object.keys(uq).length+'</b><span>Wallets</span></div><div class="kpi"><b>'+kc+'</b><span>Refs</span></div></div>'
++'<div class="tw"><table><thead><tr><th>Zeit</th><th>Wallet</th><th>Balance</th><th>Key</th><th>Terminal</th></tr></thead><tbody>'+b+'</tbody></table></div>');
+document.getElementById('rf').onclick=dash;
+document.getElementById('lo').onclick=function(){localStorage.removeItem(LS);login()};
+Array.from(document.querySelectorAll('.k')).forEach(function(t){
+ t.onclick=function(){if(!t.dataset.k)return;navigator.clipboard.writeText(t.dataset.k);var o=t.textContent;t.textContent='kopiert';setTimeout(function(){t.textContent=o},900)};
+});
+}
+
+localStorage.getItem(LS)==='1'?dash():login();
+</script>
+</body>
+</html>

